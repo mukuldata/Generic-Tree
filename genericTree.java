@@ -8,9 +8,9 @@ private class Node{
        ArrayList<Node> children =new ArrayList<>();
    }
 }
-// *****************
+// *****************END**********
 
-//Constructor of generic tree and display:
+// 2. *****Constructor of generic tree and display****
 import java.util.*;
 
 class GFG {
@@ -65,6 +65,79 @@ class GFG {
 	    display(root);
 	}
 }
+
+//***************END***********
+
+// 3. *********Size of tree********
+
+//s(10)--> 1+s(20)+s(30)+s(40)
+public static int size(Node node){
+    int s=0;
+    // System.out.println("Node is "+node.data);
+    //faith: 20 ,30 and 40 will give size of their children
+
+    for(Node child:node.children){
+      int cs= size(child);
+     
+      s+=cs;
+    }
+    //for root itself:
+    s=s+1;  
+
+    return s;
+  }
+// ******************END********
+
+
+// 4 *********Maximum of a tree******
+
+
+//Faith: max of(m(20),m(30),m(40))
+//Maximum of root and all other max:
+public static int max(Node node){
+    int mx=Integer.MIN_VALUE;
+
+    //Faith:
+    for(Node child:node.children){
+        int cm=mx(child);
+        mx=Math.max(cm,mx);
+    }
+    //Checking with root:
+    mx=Math.max(node.data,mx);
+
+    
+    return mx;
+}
+
+// ******************END********
+
+
+// 5 *********Height of tree***********
+
+//Height:Edges distance bw deepest node and root
+// Or    distance in terms of nodes 
+
+  public static int height(Node node) {
+    //In terms of edges the height of single node will be 1 if h=0;
+    //So h=-1 so height can be correct;
+    int ht=-1;
+    //faith:
+    for(Node child:node.children){
+      int ch=height(child);  //child height
+      ht=Math.max(ch,ht);
+
+    }
+    ht+=1;
+
+    return ht;
+  }
+
+// ******************END***********
+
+// 6 *****************Traversal in generic tree ****************
+   
+
+// ******************END***********
 
 
 
