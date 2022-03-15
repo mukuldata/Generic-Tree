@@ -112,7 +112,7 @@ public static int max(Node node){
 // ******************END********
 
 
-// 5 *********Height of tree***********
+// @@5 *********Height of tree***********
 
 //Height:Edges distance bw deepest node and root
 // Or    distance in terms of nodes 
@@ -135,11 +135,73 @@ public static int max(Node node){
 // ******************END***********
 
 // 6 *****************Traversal in generic tree ****************
+   public static void traversals(Node node){
+    //euler's left ,on the way deep in recursion ,node's pre area
+    System.out.println("Node Pre "+node.data);
+    for(Node child:node.children){
+      //edge pre
+      System.out.println("Edge Pre "+node.data+"--"+child.data);
+      traversals(child);
+      //edge post                     --IMP(at this point if time node is 10)
+       System.out.println("Edge Post "+node.data+"--"+child.data);
+    }
+    //euler's right ,on the way out of recursion ,node's post area
+    System.out.println("Node Post "+node.data);
    
+
+    return;
+  }
 
 // ******************END***********
 
+//7 ******************Level Order Traversal*********
+	public static void levelOrder(Node node){
+    //Using queue: No recursion
+    Queue<Node>q=new ArrayDeque<>();
+    q.add(node);
 
+    //RPA algo: Remove-Print-Add;
+      while(q.size()>0){
+        node=q.remove();
+        System.out.print(node.data+" ");
+
+        for(Node child:node.children){
+          q.add(child);
+        }
+
+      }
+      System.out.print(".");
+  }
+
+// ******************END***********
+
+//@@8**********Level Order Linewise ***************
+
+//Using two queues : Main queue and child queue
+  public static void levelOrderLinewise(Node node){
+   Queue<Node> mq=new ArrayDeque<>();
+   Queue<Node> cq=new ArrayDeque<>();
+   mq.add(node);
+
+   while(mq.size()>0){
+     node=mq.remove();   
+     System.out.print(node.data+" ");
+
+     for(Node child:node.children){
+       cq.add(child);
+       }
+
+       if(mq.size()==0){
+       mq=cq;
+       cq=new ArrayDeque<>();
+       System.out.println();
+       }
+   }
+}
+
+// ******************END***********
+
+//9 
 
 
 
