@@ -201,7 +201,108 @@ public static int max(Node node){
 
 // ******************END***********
 
-//9 
+//9 Level order Linewise :More approaches
+//Approach2:  Using null after a level:
+private static class Node {
+    int data;
+    ArrayList<Node> children = new ArrayList<>();
+
+    Node(){
+
+  }
+   Node(int data){
+    this.data=data;
+  }
+}
+   //using null after a level:
+public static void levelOrderLinewise2(Node node){
+  Queue<Node>q=new ArrayDeque<>();
+  q.add(node);
+  q.add(new Node(-1)); //calling a parameterized constructor
+
+  while(q.size()>0){
+    node=q.remove();
+    //if removed node is not null;
+    if(node.data!=-1){
+      System.out.print(node.data+" ");
+      for(Node child:node.children){
+        q.add(child);
+      }
+    }
+    else{
+      if(q.size()>0){
+        q.add(new Node (-1));    //adding null
+        System.out.println();
+      }
+    }
+  }
+}
+
+//***************************************
+// Approach 3:Using count variable: 
+public static void levelOrderLinewise3(Node node){
+  Queue<Node>q=new ArrayDeque<>();
+  q.add(node);
+ 
+  while(q.size()>0){
+  int count=q.size();
+  //After a level ,it will print a line:
+   for(int i=1;i<=count;i++){
+     node =q.remove();
+     System.out.print(node.data+" ");
+  
+    for(Node child:node.children){
+      q.add(child);
+    }
+  }
+  System.out.println();
+    
+  }
+}
+
+// *************************************
+
+// Approach 4: Using pair of level and node:
+private static class Pair{
+  Node node;
+  int level;
+
+
+  Pair(){
+
+  }
+  Pair(Node node,int level){
+    this.node=node;
+    this.level=level;
+  }
+}
+
+public static void levelOrderLinewise4(Node node){
+      Queue<Pair> q=new ArrayDeque<>();
+      q.add(new Pair(node,1));
+      int level=1;
+      while(q.size()>0){
+        Pair p=q.remove();
+        if(p.level>level){
+          level=p.level;
+          System.out.println();
+        }
+        System.out.print(p.node.data+" ");
+
+        for(Node child:p.node.children){
+          Pair cp=new Pair(child,p.level+1);
+          q.add(cp);
+        }
+      }
+}
+
+// ****************************END**********************
+
+// 10 Mirror of generic tree:
+
+
+
+
 
 
 
